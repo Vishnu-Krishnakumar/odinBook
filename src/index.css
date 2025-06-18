@@ -53,7 +53,28 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+.friends{
+  display: flex;
+  flex-direction: column;
+}
+.intro{
+  display: flex;
+  flex-direction: column;
+}
+.profileAvatar{
+  width:300px;
+  height:300px;
+}
+.userProfile{
+  display: flex;
+}
+.userProfile *{
+  padding: 20px;
+}
+.posts{
+  display: flex;
+  flex-direction: column;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
