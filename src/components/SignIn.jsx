@@ -13,9 +13,9 @@ function SignIn(){
   return(
     <div>
       <form onSubmit={formSubmit}>
-        <label for ="userName">User Name:</label>
+        <label htmlFor ="userName">User Name:</label>
         <input type ="text" id = "userName" name = "userName"></input>
-        <label for = "password">Password:</label>
+        <label htmlFor = "password">Password:</label>
         <input type ="password" id ="password" name = "password"></input>
         <input type = "submit" value = "Submit"></input>
       </form>

@@ -53,6 +53,10 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.comments{
+  display: flex;
+  flex-direction: column;
+}
 .friends{
   display: flex;
   flex-direction: column;
@@ -61,6 +65,12 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
 }
+.mainProfile{
+  display: flex;
+}
+.mainProfile *{
+  padding: 20px;
+}
 .profileAvatar{
   width:300px;
   height:300px;
@@ -68,10 +78,24 @@ button:focus-visible {
 .userProfile{
   display: flex;
 }
-.userProfile *{
-  padding: 20px;
+
+.postArea {
+  display: flex;
+  flex-direction: column;
 }
-.posts{
+.postSubmission{
+  display: flex;
+  flex-direction: column;
+}
+.post{
+  display: flex;
+  flex-direction: column;
+}
+.randomUsers{
+  display:flex;
+}
+.randomUser{
+  padding: 10px;
   display: flex;
   flex-direction: column;
 }
