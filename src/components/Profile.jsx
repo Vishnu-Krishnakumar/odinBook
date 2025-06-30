@@ -4,6 +4,7 @@ import Posts from './Posts';
 import Friends from './Friends';
 import Users from './Users';
 import { Link } from 'react-router-dom';
+import Search from './Search';
 const Profile = () => {
 
   function createRandomUser() {
@@ -25,6 +26,7 @@ const Profile = () => {
   return (
     <div >
       <div>
+        <Search></Search>
         <header>
           <Users></Users>
         </header>
