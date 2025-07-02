@@ -5,6 +5,7 @@ import Friends from './Friends';
 import Users from './Users';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import UsersIndex from './UsersIndex';
 const Profile = () => {
 
   function createRandomUser() {
@@ -26,6 +27,7 @@ const Profile = () => {
   return (
     <div >
       <div>
+        <Link to="usersIndex">Users Index</Link>
         <Search></Search>
         <header>
           <Users></Users>
@@ -44,6 +46,7 @@ const Profile = () => {
       </div>
             
       <div>
+          <Link to ="postsIndex">Recent Posts</Link>
           <Posts></Posts>
         </div>
     </div>

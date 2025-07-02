@@ -6,6 +6,8 @@ import App from './App.jsx'
 import SignIn from './components/SignIn.jsx';
 import Profile from './components/Profile.jsx'
 import Main from './components/Main.jsx';
+import UsersIndex from './components/UsersIndex.jsx';
+import PostsIndex from './components/PostsIndex.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,7 +20,15 @@ const router = createBrowserRouter([
   {
     path:"signIn",
     element:<SignIn/>,
-  }
+  },
+  {
+    path:"/profile/usersIndex",
+    element:<UsersIndex/>,
+  },
+  {
+    path:"/profile/postsIndex",
+    element:<PostsIndex/>,
+  },
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
