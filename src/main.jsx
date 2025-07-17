@@ -11,23 +11,29 @@ import PostsIndex from './components/PostsIndex.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main/>,
-  },
-  {
-    path: "profile",
-    element: <Profile/>,
-  },
-  {
-    path:"signIn",
-    element:<SignIn/>,
-  },
-  {
-    path:"/profile/usersIndex",
-    element:<UsersIndex/>,
-  },
-  {
-    path:"/profile/postsIndex",
-    element:<PostsIndex/>,
+    element: <App />, 
+    children: [
+      {
+        index: true,
+        element: <Main />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "signIn",
+        element: <SignIn />,
+      },
+      {
+        path: "profile/usersIndex",
+        element: <UsersIndex />,
+      },
+      {
+        path: "profile/postsIndex",
+        element: <PostsIndex />,
+      },
+    ],
   },
 ]);
 createRoot(document.getElementById('root')).render(
