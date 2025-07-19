@@ -8,11 +8,14 @@ import { Link,useLocation  } from 'react-router-dom';
 import Search from './Search';
 import UsersIndex from './UsersIndex';
 import { socket } from '../sockets/socket';
+import FriendRequest from './FriendRequests';
 
 function Profile({route}){
   const location = useLocation();
   const { userId, isConnected } = location.state || {};
+  let requests = [];
 
+  
   function createRandomUser() {
     return {
       userId: faker.string.uuid(),
@@ -37,6 +40,19 @@ function Profile({route}){
     socket.emit("sendRequest",user);
   }
 
+  // useEffect(()=>{
+    
+  //   function onRequest(request){
+  //     console.log(request);
+  //     requests = (request.requests);
+  //   }
+
+  //   socket.on(`request-${2}`,onRequest);
+
+  //   return ()=>{
+  //     socket.off(`request-${2}`,onRequest);
+  //   }
+  // },[])
 
   return (
     <div >
@@ -57,9 +73,13 @@ function Profile({route}){
             <div>
               <Intro user ={user} ></Intro>
             </div>
-         <div>
-            <Friends></Friends>
-          </div>
+            <div>
+              <FriendRequest requests = {requests}></FriendRequest>
+            </div>
+            <div>
+              <Friends></Friends>
+            </div>
+            
         </div>
       </div>
             
