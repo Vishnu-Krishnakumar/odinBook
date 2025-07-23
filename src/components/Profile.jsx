@@ -12,7 +12,7 @@ import FriendRequest from './FriendRequests';
 
 function Profile({route}){
   const location = useLocation();
-  const { userId } = location.state || {};
+  const { userId } = location.state ;
   const [serverConnection, serverIsConnected] = useState(socket.connected);
   
   function createRandomUser() {
@@ -32,7 +32,7 @@ function Profile({route}){
   function onClickTest(e){
     e.preventDefault();
     let user = {
-      sender:5,
+      sender:7,
       receiver:1,
     }
     console.log(user);
@@ -40,6 +40,7 @@ function Profile({route}){
   }
 
   useEffect(() => {
+    console.log(userId);
     function onConnect() {
       serverIsConnected(true);
     }
@@ -48,18 +49,18 @@ function Profile({route}){
       serverIsConnected(false);
     }
     
-    function onRequest(request){
-      console.log(request)
-    }
+    // function onRequest(request){
+    //   console.log(request)
+    // }
  
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
-    socket.on(`request-${userId}`, onRequest);
+    // socket.on(`request-${userId}`, onRequest);
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      socket.off('request', onRequest);
+      // socket.off('request', onRequest);
     };
   }, []);
 
@@ -83,10 +84,10 @@ function Profile({route}){
               <Intro user ={user} ></Intro>
             </div>
             <div>
-              <FriendRequest ></FriendRequest>
+              <FriendRequest userId = {userId} ></FriendRequest>
             </div>
             <div>
-              <Friends></Friends>
+              <Friends userId = {userId} ></Friends>
             </div>
             
         </div>

@@ -22,7 +22,7 @@ function SignIn(){
       socket.connect();
       navigate('/profile', {
         state: {
-          userId: verified.id,
+          userId: verified.user.id,
         },
       });
     }
