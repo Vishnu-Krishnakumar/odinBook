@@ -4,17 +4,18 @@ import Intro from './Intro'
 import Posts from './Posts';
 import Friends from './Friends';
 import Users from './Users';
-import { Link,useLocation  } from 'react-router-dom';
+import { Link,useLocation, useParams  } from 'react-router-dom';
 import Search from './Search';
 import UsersIndex from './UsersIndex';
 import { socket } from '../sockets/socket';
 import FriendRequest from './FriendRequests';
-
+import { retrieveUser } from '../serverUtils/server';
 function Profile({route}){
   const location = useLocation();
-  const { userId } = location.state ;
+  const { userId } = location.state || '';
   const [serverConnection, serverIsConnected] = useState(socket.connected);
-  
+  const [newUser,setUser] = useState({});
+  const params = useParams();
   function createRandomUser() {
     return {
       userId: faker.string.uuid(),
@@ -39,7 +40,7 @@ function Profile({route}){
     socket.emit("sendRequest",user);
   }
 
-  useEffect(() => {
+  useEffect( () => {
     console.log(userId);
     function onConnect() {
       serverIsConnected(true);
@@ -48,7 +49,12 @@ function Profile({route}){
     function onDisconnect() {
       serverIsConnected(false);
     }
-    
+    async function userRetrieval(){
+      let foundUser = await retrieveUser(params.userId)
+      setUser(foundUser);
+    }
+    let found = userRetrieval();
+    console.log(newUser);
     // function onRequest(request){
     //   console.log(request)
     // }
@@ -81,13 +87,13 @@ function Profile({route}){
         <div className ="userProfile">
           <div>
             <div>
-              <Intro user ={user} ></Intro>
+              <Intro user ={newUser} ></Intro>
             </div>
             <div>
-              <FriendRequest userId = {userId} ></FriendRequest>
+              <FriendRequest userId = {params.userId} ></FriendRequest>
             </div>
             <div>
-              <Friends userId = {userId} ></Friends>
+              <Friends userId = {params.userId} ></Friends>
             </div>
             
         </div>
@@ -95,7 +101,7 @@ function Profile({route}){
             
       <div>
           <Link to ="postsIndex">Recent Posts</Link>
-          <Posts></Posts>
+          <Posts userId ={params.userId}></Posts>
         </div>
     </div>
       </div>

@@ -4,13 +4,13 @@ function Intro({user}){
   console.log(user);
   return(
     <div className ="intro">
-      <img className="profileAvatar" src={user.avatar}></img>
+      <img className="profileAvatar" ></img>
       <button>Edit</button>
-      <span>{user.username}</span>
+      <span>{user.firstname + ' ' +user.lastname  }</span>
       <button>Edit</button>
       <span>{user.email}</span>
       <button>Edit</button>
-      <span>{user.birthdate.toLocaleDateString()}</span>
+      <span>{}</span>
       <button>Edit</button>
     </div>
   )

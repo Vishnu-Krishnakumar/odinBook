@@ -20,7 +20,7 @@ function SignIn(){
     else{
       console.log(verified.user);
       socket.connect();
-      navigate('/profile', {
+      navigate(`/profile/${verified.user.id}`, {
         state: {
           userId: verified.user.id,
         },
