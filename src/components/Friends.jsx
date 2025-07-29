@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { socket } from "../sockets/socket";
-function Friends({userId}){
+function Friends({userId, isOwnProfile}){
 
   const [friends,setFriends] = useState([]);
   
@@ -16,7 +16,8 @@ function Friends({userId}){
     return ()=>{
       socket.off(`friendList-${userId}`,setList);
     }
-  })
+
+  },[userId])
 
   return(
     <div className ="friends">
@@ -25,7 +26,7 @@ function Friends({userId}){
        {
          friends.map((friend,index)=>{
           return(
-            <li key = {index} if = {friend.id}>{friend.firstname + " " + friend.lastname}</li>
+            <li key = {index} id = {friend.id}>{friend.firstname + " " + friend.lastname}</li>
           )
          })
        }

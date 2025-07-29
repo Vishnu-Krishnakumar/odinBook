@@ -79,4 +79,41 @@ async function retrievePosts(userId){
   console.log(posts);
   return posts;
 }
-export { logIn,newPost,retrievePosts,retrieveUser};
+
+async function retrieveComments(postId){
+  let response = await fetch (`http://localhost:3000/comments/${postId}`,{
+    mode:"cors",
+    method:"GET",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+  });
+  let comments = await response.json();
+  console.log(comments);
+  return comments;
+}
+
+async function submitComment(formData){
+  let postId = formData.get("postId");
+  const body = {
+    content:formData.get("content"),
+    userId:formData.get("userId"),
+    postId: postId,
+    email: formData.get("username"),
+  }
+  console.log(body);
+  let response = await fetch(`http://localhost:3000/comments/${postId}`,{
+    mode:"cors",
+    method:"POST",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(body),
+  });
+  let submission = await response.json();
+  console.log(submission);
+  return submission;
+}
+export { logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment};

@@ -1,17 +1,17 @@
 
 
-function Intro({user}){
-  console.log(user);
+function Intro({user, isOwnProfile}){
+  console.log(isOwnProfile);
   return(
     <div className ="intro">
       <img className="profileAvatar" ></img>
-      <button>Edit</button>
+      {isOwnProfile &&<button>Edit</button>}
       <span>{user.firstname + ' ' +user.lastname  }</span>
-      <button>Edit</button>
+      {isOwnProfile &&<button>Edit</button>}
       <span>{user.email}</span>
-      <button>Edit</button>
+      {isOwnProfile &&<button>Edit</button>}
       <span>{}</span>
-      <button>Edit</button>
+      {isOwnProfile &&<button>Edit</button>}
     </div>
   )
 }

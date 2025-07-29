@@ -10,12 +10,21 @@ import UsersIndex from './UsersIndex';
 import { socket } from '../sockets/socket';
 import FriendRequest from './FriendRequests';
 import { retrieveUser } from '../serverUtils/server';
+import { useAuth } from '../context/authContext';
 function Profile({route}){
-  const location = useLocation();
-  const { userId } = location.state || '';
+  const { loggedUser,loading } = useAuth();  
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
   const [serverConnection, serverIsConnected] = useState(socket.connected);
   const [newUser,setUser] = useState({});
   const params = useParams();
+  const profileUserId = parseInt(params.userId);
+  
+
+
+  const isOwnProfile = !loading && loggedUser && loggedUser.user.id === profileUserId;
+  
   function createRandomUser() {
     return {
       userId: faker.string.uuid(),
@@ -28,7 +37,7 @@ function Profile({route}){
     };
   }
 
-  const user = createRandomUser();
+
   
   function onClickTest(e){
     e.preventDefault();
@@ -41,7 +50,7 @@ function Profile({route}){
   }
 
   useEffect( () => {
-    console.log(userId);
+ 
     function onConnect() {
       serverIsConnected(true);
     }
@@ -53,8 +62,9 @@ function Profile({route}){
       let foundUser = await retrieveUser(params.userId)
       setUser(foundUser);
     }
-    let found = userRetrieval();
-    console.log(newUser);
+    userRetrieval();
+    // console.log("test");
+    // console.log(user)
     // function onRequest(request){
     //   console.log(request)
     // }
@@ -69,13 +79,15 @@ function Profile({route}){
       // socket.off('request', onRequest);
     };
   }, []);
+  
+
 
   return (
     <div >
       <div>
         <Link to="usersIndex">User Index</Link>
         <Search></Search>
-        <span>Welcome user {userId}</span>
+        <span>Welcome user {loggedUser?.user.id}</span>
         <button onClick={onClickTest}>request Test</button>
       </div>
       <div>
@@ -87,13 +99,13 @@ function Profile({route}){
         <div className ="userProfile">
           <div>
             <div>
-              <Intro user ={newUser} ></Intro>
+              <Intro user ={newUser} isOwnProfile = {isOwnProfile} ></Intro>
             </div>
             <div>
-              <FriendRequest userId = {params.userId} ></FriendRequest>
+              <FriendRequest userId = {params.userId}  isOwnProfile = {isOwnProfile}></FriendRequest>
             </div>
             <div>
-              <Friends userId = {params.userId} ></Friends>
+              <Friends userId = {params.userId} isOwnProfile = {isOwnProfile} ></Friends>
             </div>
             
         </div>
@@ -101,7 +113,7 @@ function Profile({route}){
             
       <div>
           <Link to ="postsIndex">Recent Posts</Link>
-          <Posts userId ={params.userId}></Posts>
+          <Posts userId ={params.userId} isOwnProfile = {isOwnProfile} ></Posts>
         </div>
     </div>
       </div>

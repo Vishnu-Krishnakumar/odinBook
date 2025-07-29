@@ -8,6 +8,7 @@ import Profile from './components/Profile.jsx'
 import Main from './components/Main.jsx';
 import UsersIndex from './components/UsersIndex.jsx';
 import PostsIndex from './components/PostsIndex.jsx';
+import { AuthProvider } from './context/authContext.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />  
+    </AuthProvider> 
   </StrictMode>,
 )

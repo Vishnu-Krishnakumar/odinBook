@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { socket } from "../sockets/socket"
-function FriendRequest({userId}){
+function FriendRequest({userId, isOwnProfile}){
   const [newRequests, setRequests] = useState([]);
 
   function friendAccept(e){
