@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { useState,useEffect } from 'react'; 
 import { useFormStatus } from 'react-dom';
-import { newPost,retrievePosts } from '../serverUtils/server';
+import { newPost,retrievePosts,likePost } from '../serverUtils/server';
 import Comments from './Comments';
 function Posts({userId , isOwnProfile}){
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -15,14 +15,25 @@ function Posts({userId , isOwnProfile}){
     setTextAreaValue('');
     let posts = await retrievePosts(userId);
     console.log(posts);
-    setPosts(posts);
+    if(!posts)
+      setPosts(posts);
+  }
+
+  async function like(e){
+    // e.preventDefault();
+    console.log(e.target);
+    let postId = e.target.id
+    let response = await likePost(postId,userId);
+    console.log(response);
+    retrieve();
+  }
+
+  async function retrieve(){
+    const newPosts = await retrievePosts(userId);
+    setPosts(newPosts);
   }
 
   useEffect( ()=>{
-    async function retrieve(){
-      const newPosts = await retrievePosts(userId);
-      setPosts(newPosts);
-    }
     retrieve();
   },[userId])
 
@@ -42,10 +53,11 @@ function Posts({userId , isOwnProfile}){
         <div className ="posts">
           {posts.map((post,index)=>{
             return (
-              <div key ={index} className="post">
+              <div key = {index} className="post">
                 <span>{post.content}</span>
-                <button id = {post.id}>Like</button>
-                <Comments postId ={post.id}></Comments>
+                <span>{post.likes.length} likes!</span>
+                <button onClick = {like} id = {post.id}>Like</button>
+                <Comments postId = {post.id}></Comments>
               </div>
             )
           })}

@@ -30,6 +30,7 @@ async function logIn(formData){
     return false;
   }
 }
+
 async function retrieveUser(userId){
   let response = await fetch(`http://localhost:3000/user/profile/${userId}`,{
     mode:"cors",
@@ -116,4 +117,25 @@ async function submitComment(formData){
   console.log(submission);
   return submission;
 }
-export { logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment};
+
+async function likePost(postId,userId){
+  const body = {
+    id:userId,
+    postId:postId,
+  }
+  let response = await fetch('http://localhost:3000/posts/likePost',{
+    mode:"cors",
+    method:"POST",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(body)
+  })
+  response = await response.json();
+  console.log(response);
+  return response;
+}
+
+
+export { logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment,likePost};
