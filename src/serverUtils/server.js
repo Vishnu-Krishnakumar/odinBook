@@ -1,5 +1,25 @@
 
+async function register(formData){
+  const body = {
+    firstname : formData.get('firstname'),
+    lastname : formData.get('lastname'),
+    email : formData.get('email'),
+    password : formData.get('password'),
+    passwordRepeat : formData.get('passwordRepeat'), 
+  }
 
+  let response = await fetch('http://localhost:3000/user/register',{
+    mode:"cors",
+    method: "POST",
+    credentials: "include",
+    headers: { 
+      "Content-Type" : "application/json",
+    },
+    body:JSON.stringify(body),
+  });
+  return response;
+
+}
 async function logIn(formData){
   const body = {
     email:formData.get("userName"),
@@ -138,4 +158,4 @@ async function likePost(postId,userId){
 }
 
 
-export { logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment,likePost};
+export { register,logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment,likePost};

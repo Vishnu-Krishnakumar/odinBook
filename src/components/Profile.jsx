@@ -20,6 +20,7 @@ function Profile({route}){
   const [newUser,setUser] = useState({});
   const params = useParams();
   const profileUserId = parseInt(params.userId);
+  const loggedId = loggedUser?.user.id
   
 
 
@@ -105,7 +106,7 @@ function Profile({route}){
               <FriendRequest userId = {params.userId}  isOwnProfile = {isOwnProfile}></FriendRequest>
             </div>
             <div>
-              <Friends userId = {params.userId} isOwnProfile = {isOwnProfile} ></Friends>
+              <Friends userId = {params.userId} isOwnProfile = {isOwnProfile}></Friends>
             </div>
             
         </div>
