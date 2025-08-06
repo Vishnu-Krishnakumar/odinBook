@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 
 import { socket } from "../sockets/socket";
+import { friendList } from "../serverUtils/server";
 function Friends({userId, isOwnProfile}){
 
   const [friends,setFriends] = useState([]);
-  
+
   useEffect(()=>{
-    function setList(list){
+    
+    async function setList(){
+      // console.log(list);
+      // setFriends(list);
+      let list = await friendList(userId);
       console.log(list);
       setFriends(list);
     }
+    setList();
+    // socket.on(`friendList-${userId}`,setList);
 
-    socket.on(`friendList-${userId}`,setList);
-
-    return ()=>{
-      socket.off(`friendList-${userId}`,setList);
-    }
+    // return ()=>{
+    //   socket.off(`friendList-${userId}`,setList);
+    // }
 
   },[userId])
 

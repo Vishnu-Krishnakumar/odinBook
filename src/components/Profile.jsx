@@ -11,11 +11,14 @@ import { socket } from '../sockets/socket';
 import FriendRequest from './FriendRequests';
 import { retrieveUser } from '../serverUtils/server';
 import { useAuth } from '../context/authContext';
+import { useNavigate,useNavigation  } from "react-router-dom";
 function Profile({route}){
-  const { loggedUser,loading } = useAuth();  
+  const { loggedUser,loading,logout } = useAuth();  
+  const navigate = useNavigate();
   if (loading) {
     return <div>Loading...</div>; 
   }
+
   const [serverConnection, serverIsConnected] = useState(socket.connected);
   const [newUser,setUser] = useState({});
   const params = useParams();
@@ -42,12 +45,14 @@ function Profile({route}){
   
   function onClickTest(e){
     e.preventDefault();
-    let user = {
-      sender:7,
-      receiver:1,
-    }
-    console.log(user);
-    socket.emit("sendRequest",user);
+    // let user = {
+    //   sender:7,
+    //   receiver:1,
+    // }
+    // console.log(user);
+    // socket.emit("sendRequest",user);
+    logout();
+    navigate('/signin')
   }
 
   useEffect( () => {
@@ -89,7 +94,7 @@ function Profile({route}){
         <Link to="usersIndex">User Index</Link>
         <Search></Search>
         <span>Welcome user {loggedUser?.user.id}</span>
-        <button onClick={onClickTest}>request Test</button>
+        <button onClick={onClickTest}>Log Out</button>
       </div>
       <div>
         <header>

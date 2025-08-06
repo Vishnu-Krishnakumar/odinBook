@@ -2,12 +2,13 @@ import { useNavigate,useNavigation  } from "react-router-dom";
 import { logIn } from '../serverUtils/server';
 import { useState,useEffect } from "react";
 import { socket } from '../sockets/socket';
+import { useAuth } from '../context/authContext';
 function SignIn(){
   const navigate = useNavigate();
 
   const [userId, setUserId] = useState(2);
-
-  
+  const {loggedUser,login,logout,loading}  = useAuth();
+  let verified = null;
 
   async function formSubmit(e){
     e.preventDefault();
@@ -15,19 +16,34 @@ function SignIn(){
     const formData = new FormData(e.target);
     console.log(formData.get("userName"));
     console.log(formData.get("password"));
-    let verified = await logIn(formData);
-    if (!verified) return;
-    else{
-      console.log(verified.user);
+    logout();
+    let token = await logIn(formData);
+    // if (!verified) return;
+    socket.connect();
+    login(token);
+    // else{
+    //   console.log(verified.user);
+    //   socket.connect();
+    //   navigate(`/profile/${verified.user.id}`, {
+    //     state: {
+    //       userId: verified.user.id,
+    //     },
+    //   });
+    // }
+  }
+
+  useEffect(() => {
+    if (!loading && loggedUser) {
+      console.log("User is logged in:", loggedUser);
+      console.log(loggedUser.user);
       socket.connect();
-      navigate(`/profile/${verified.user.id}`, {
-        state: {
-          userId: verified.user.id,
-        },
+      navigate(`/profile/${loggedUser.user.id}`, {
+             state: {
+               userId: loggedUser.user.id,
+             },
       });
     }
-  
-  }
+  }, [loggedUser, loading]);
 
   return(
     <div>

@@ -1,4 +1,5 @@
 
+
 async function register(formData){
   const body = {
     firstname : formData.get('firstname'),
@@ -20,7 +21,9 @@ async function register(formData){
   return response;
 
 }
+
 async function logIn(formData){
+  
   const body = {
     email:formData.get("userName"),
     password:formData.get("password"),
@@ -38,12 +41,13 @@ async function logIn(formData){
   if(response.status === 200){
     let token = await response.json();
     localStorage.setItem("authToken", token.token);
-    console.log(localStorage.getItem("authToken"));
-    console.log(token);
-    token = token.token.split('.');
-    let user = JSON.parse(atob(token[1])).user;
-    verified = {user:user,verify:true};
-    return verified;
+    
+    // console.log(localStorage.getItem("authToken"));
+    // console.log(token);
+    // token = token.token.split('.');
+    // let user = JSON.parse(atob(token[1])).user;
+    // verified = {user:user,verify:true};
+    return token.token;
   }
   else{
     console.log("Invalid Login credentials");
@@ -157,5 +161,18 @@ async function likePost(postId,userId){
   return response;
 }
 
+async function friendList(userId){
+  let response = await fetch(`http://localhost:3000/user/profile/friendList/${userId}`,{
+    mode:"cors",
+    method:"GET",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+  });
+  response = await response.json();
 
-export { register,logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment,likePost};
+  return response;
+}
+
+export { register,logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment,likePost,friendList};
