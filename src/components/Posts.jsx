@@ -4,7 +4,9 @@ import { useFormStatus } from 'react-dom';
 import { newPost,retrievePosts,likePost } from '../serverUtils/server';
 import Comments from './Comments';
 import { useAuth } from '../context/authContext';
+
 function Posts({userId , isOwnProfile, }){
+  
   const [textAreaValue, setTextAreaValue] = useState('');
   const [posts,setPosts] = useState([]);
   // const {pending} = useFormStatus();

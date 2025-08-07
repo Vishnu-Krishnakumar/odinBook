@@ -6,7 +6,7 @@ function Main (){
     <div>
       <header>welcome to HootBook!</header>
       <Link to ="signIn">Sign In</Link>
-      <Link to = "register">Register</Link>
+      <Link to ="register">Register</Link>
     </div>
   )
 

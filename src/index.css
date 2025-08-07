@@ -99,6 +99,10 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
 }
+.profileUpdate{
+  display: flex;
+  flex-direction: column;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -11,9 +11,16 @@ export function AuthProvider({ children }) {
       if (token) {
         try {
           const decoded = jwtDecode(token);
-          setUser({ ...decoded }); 
+          const now = Math.floor(Date.now() / 1000); 
+          const tokenIat = decoded.iat;
+          const maxAge = 60 * 60 ;
+          if (now - tokenIat > maxAge) {
+            throw new Error('Token too old');
+          }
+      
+          setUser({ ...decoded });
         } catch (err) {
-          console.error("Invalid token");
+          console.error("Invalid token:", err.message);
           localStorage.removeItem('authToken');
           setUser(null);
         }

@@ -175,4 +175,33 @@ async function friendList(userId){
   return response;
 }
 
-export { register,logIn,newPost,retrievePosts,retrieveUser,retrieveComments,submitComment,likePost,friendList};
+async function updateProfile(formData){
+  body = {
+    firstname : formData.get('firstname'),
+    lastname : formData.get('lastname'),
+    email : formData.get('email'),
+  }
+  let response = await fetch (`http://loclahost:3000/user/profileUpdate`,{
+    mode:"cors",
+    method:"POST",
+    credentials:"include",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(body)
+  })
+  console.log(response);
+  return response;
+}
+export {
+  register,
+  logIn,
+  newPost,
+  retrievePosts,
+  retrieveUser,
+  retrieveComments,
+  submitComment,
+  likePost,
+  friendList,
+  updateProfile,
+};
