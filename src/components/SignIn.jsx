@@ -18,18 +18,10 @@ function SignIn(){
     console.log(formData.get("password"));
     logout();
     let token = await logIn(formData);
-    // if (!verified) return;
+
     socket.connect();
     login(token);
-    // else{
-    //   console.log(verified.user);
-    //   socket.connect();
-    //   navigate(`/profile/${verified.user.id}`, {
-    //     state: {
-    //       userId: verified.user.id,
-    //     },
-    //   });
-    // }
+
   }
 
   useEffect(() => {

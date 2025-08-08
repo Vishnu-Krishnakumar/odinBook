@@ -176,12 +176,13 @@ async function friendList(userId){
 }
 
 async function updateProfile(formData){
-  body = {
+  const body = {
     firstname : formData.get('firstname'),
     lastname : formData.get('lastname'),
     email : formData.get('email'),
+    originalEmail : formData.get('originalEmail'),
   }
-  let response = await fetch (`http://loclahost:3000/user/profileUpdate`,{
+  let response = await fetch (`http://localhost:3000/user/profileUpdate`,{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -191,7 +192,21 @@ async function updateProfile(formData){
     body:JSON.stringify(body)
   })
   console.log(response);
+  response = await response.json();
   return response;
+}
+
+async function profilePictureUpload(formData){
+
+  let response = await fetch (`http://localhost:3000/user/profilePictureUpload`,{
+    mode:"cors",
+    method:"POST",
+    credentials:"include",
+    body: formData,
+  })
+  console.log(response);
+  response = await response.json();
+  console.log(response);
 }
 export {
   register,
@@ -204,4 +219,5 @@ export {
   likePost,
   friendList,
   updateProfile,
+  profilePictureUpload,
 };

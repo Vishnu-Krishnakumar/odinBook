@@ -32,7 +32,7 @@ function Profile({route}){
   function createRandomUser() {
     return {
       userId: faker.string.uuid(),
-      username: faker.internet.username(), // before version 9.1.0, use userName()
+      username: faker.internet.username(), 
       email: faker.internet.email(),
       avatar: faker.image.avatar(),
       password: faker.internet.password(),
@@ -45,12 +45,7 @@ function Profile({route}){
   
   function onClickTest(e){
     e.preventDefault();
-    // let user = {
-    //   sender:7,
-    //   receiver:1,
-    // }
-    // console.log(user);
-    // socket.emit("sendRequest",user);
+   
     logout();
     navigate('/signin')
   }
@@ -69,20 +64,16 @@ function Profile({route}){
       setUser(foundUser);
     }
     userRetrieval();
-    // console.log("test");
-    // console.log(user)
-    // function onRequest(request){
-    //   console.log(request)
-    // }
+
  
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
-    // socket.on(`request-${userId}`, onRequest);
+  
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      // socket.off('request', onRequest);
+
     };
   }, []);
   
