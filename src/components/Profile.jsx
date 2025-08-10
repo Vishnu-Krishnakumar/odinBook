@@ -15,16 +15,21 @@ import { useNavigate,useNavigation  } from "react-router-dom";
 function Profile({route}){
   const { loggedUser,loading,logout } = useAuth();  
   const navigate = useNavigate();
-  if (loading) {
-    return <div>Loading...</div>; 
-  }
-
   const [serverConnection, serverIsConnected] = useState(socket.connected);
   const [newUser,setUser] = useState({});
   const params = useParams();
   const profileUserId = parseInt(params.userId);
   const loggedId = loggedUser?.user.id
   
+
+  
+  if(!loggedUser){
+    return <div>Not Logged in!!!</div>
+  }
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
 
 
   const isOwnProfile = !loading && loggedUser && loggedUser.user.id === profileUserId;
@@ -77,7 +82,9 @@ function Profile({route}){
     };
   }, []);
   
-
+  if(newUser === null){
+    return <div>There is no such user!</div>
+  }
 
   return (
     <div >
@@ -99,7 +106,7 @@ function Profile({route}){
               <Intro user ={newUser} isOwnProfile = {isOwnProfile} ></Intro>
             </div>
             <div>
-              <FriendRequest userId = {params.userId}  isOwnProfile = {isOwnProfile}></FriendRequest>
+              <FriendRequest userId = {loggedUser.user.id}  isOwnProfile = {isOwnProfile}></FriendRequest>
             </div>
             <div>
               <Friends userId = {params.userId} isOwnProfile = {isOwnProfile}></Friends>

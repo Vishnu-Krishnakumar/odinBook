@@ -208,6 +208,16 @@ async function profilePictureUpload(formData){
   response = await response.json();
   console.log(response);
 }
+
+async function userList(){
+  let response = await fetch('http://localhost:3000/user/userList',{
+    mode:"cors",
+    method:"GET",
+    credentials:"include",
+  })
+  response = await response.json();
+  return response;
+}
 export {
   register,
   logIn,
@@ -220,4 +230,5 @@ export {
   friendList,
   updateProfile,
   profilePictureUpload,
+  userList,
 };

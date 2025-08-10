@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode';
-
+import { Socket } from 'socket.io-client';
+import { socket } from '../sockets/socket';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -32,12 +33,13 @@ export function AuthProvider({ children }) {
       localStorage.setItem('authToken', token);
       const decoded = jwtDecode(token);
       setUser({ ...decoded });
+      socket.on();
     };
   
     const logout = () => {
       localStorage.removeItem('authToken');
       setUser(null);
-   
+      socket.off();
     };
   
     return (

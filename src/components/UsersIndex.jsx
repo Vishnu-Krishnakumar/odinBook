@@ -1,29 +1,34 @@
 import { faker } from '@faker-js/faker';
+import { userList } from '../serverUtils/server';
+import { useEffect, useState } from 'react';
+import { socket } from "../sockets/socket"
+import { useAuth } from '../context/authContext';
 function UsersIndex(){
-  function createRandomUser() {
-    return {
-      userId: faker.string.uuid(),
-      username: faker.internet.username(), // before version 9.1.0, use userName()
-      email: faker.internet.email(),
-      avatar: faker.image.avatar(),
-      password: faker.internet.password(),
-      birthdate: faker.date.birthdate(),
-      registeredAt: faker.date.past(),
-      };
+  const [users,setUsers] = useState([]);
+  const { loggedUser,loading,logout } = useAuth();  
+  function friendRequest(e){
+    e.preventDefault();
+    console.log(e.target)
+    console.log(loggedUser)
+    socket.emit(`sendRequest`,{sender:loggedUser.user.id,receiver:e.target.id});
   }
 
-  const users = faker.helpers.multiple(createRandomUser, {
-  count: 25,
-  });
-  console.log(users);
+  useEffect(()=>{
+    async function userListRetrieval(){
+      const list = await userList();
+      setUsers(list);
+    }
+    userListRetrieval();
+  },[])
+
   return (
     <div>
       {users.map((user)=>{
         return (
-          <div className = "randomUser">
-            <img className="profileAvatar" src={user.avatar}></img>
-            <span>{user.username}</span>
-            <button>Friend Request!</button>
+          <div id = {user.id} key ={user.id} className = "randomUser">
+            <img className="profileAvatar" src={user.profilepic}></img>
+            <span>{user.firstname + " " + user.lastname}</span>
+            <button id = {user.id} onClick={friendRequest}>Friend Request!</button>
           </div>
         )
         

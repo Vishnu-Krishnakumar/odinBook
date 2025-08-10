@@ -5,7 +5,7 @@ import { friendList } from "../serverUtils/server";
 function Friends({userId, isOwnProfile}){
 
   const [friends,setFriends] = useState([]);
-
+  console.log(userId);
   useEffect(()=>{
     
     async function setList(){
@@ -31,7 +31,9 @@ function Friends({userId, isOwnProfile}){
        {
          friends.map((friend,index)=>{
           return(
-            <li key = {index} id = {friend.id}>{friend.firstname + " " + friend.lastname}</li>
+            <a key ={index} href={"http://127.0.0.1:5173/profile/" + friend.id}>
+            <li id = {friend.id} >{friend.firstname + " " + friend.lastname}</li>
+            </a>
           )
          })
        }
