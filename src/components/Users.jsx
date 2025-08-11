@@ -1,53 +1,41 @@
 import { faker } from '@faker-js/faker';
+import { userListIntro } from '../serverUtils/server';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../context/authContext';
+import { socket } from '../sockets/socket';
 function Users() {
-  
-  function createRandomUser() {
-    return {
-      userId: faker.string.uuid(),
-      username: faker.internet.username(), // before version 9.1.0, use userName()
-      email: faker.internet.email(),
-      avatar: faker.image.avatar(),
-      password: faker.internet.password(),
-      birthdate: faker.date.birthdate(),
-      registeredAt: faker.date.past(),
-    };
+  const [users,setUsers] = useState([]);
+  const { loggedUser,loading,logout } = useAuth();  
+  function friendRequest(e){
+    e.preventDefault();
+    console.log(e.target)
+    console.log(loggedUser)
+    socket.emit(`sendRequest`,{sender:loggedUser.user.id,receiver:e.target.id});
   }
 
-  const users = faker.helpers.multiple(createRandomUser, {
-    count: 5,
-  });
-  console.log(users);
+  useEffect(()=>{
+    async function randomUsers(){
+      let random = await userListIntro();
+      console.log(random);
+      setUsers(random);
+    }
+    randomUsers()
+  },[])
+
   return (
     <div>
       <span>People you might know!</span>
       <div className='randomUsers'>
-      <div className = "randomUser">
-        <img className="profileAvatar" src={users[0].avatar}></img>
-        <span>{users[0].username}</span>
-        <button>Friend Request!</button>
-      </div>
-      <div className = "randomUser">
-        <img className="profileAvatar" src={users[1].avatar}></img>
-        <span>{users[1].username}</span>
-        <button>Friend Request!</button>
-      </div>
-      <div className = "randomUser">
-        <img className="profileAvatar" src={users[2].avatar}></img>
-        <span>{users[2].username}</span>
-        <button>Friend Request!</button>
-      </div>
-      <div className = "randomUser">
-        <img className="profileAvatar" src={users[3].avatar}></img>
-        <span>{users[3].username}</span>
-        <button>Friend Request!</button>
-      </div>
-      <div className = "randomUser">
-        <img className="profileAvatar" src={users[4].avatar}></img>
-        <span>{users[4].username}</span>
-        <button>Friend Request!</button>
-      </div>
-      </div>
-      
+      {users.map((user)=>{
+        return (
+          <div id = {user.id} key ={user.id} className = "randomUser">
+            <img className="profileAvatar" src={user.profilepic}></img>
+            <span>{user.firstname + " " + user.lastname}</span>
+            <button id = {user.id} onClick={friendRequest}>Friend Request!</button>
+          </div>
+        )
+      })}
+      </div>    
     </div>
 )
 }

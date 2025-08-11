@@ -218,6 +218,27 @@ async function userList(){
   response = await response.json();
   return response;
 }
+
+async function userListIntro(){
+  let response = await fetch('http://localhost:3000/user/userListIntro',{
+    mode:"cors",
+    method:"GET",
+    credentials:"include",
+  })
+  console.log(response);
+  response = await response.json();
+  return response;
+}
+async function friendRequests(){
+  let response = await fetch ('http://localhost:3000/user/friendRequests',{
+    mode:"cors",
+    method:"GET",
+    credentials:"include",
+  })
+  console.log(response);
+  response = await response.json();
+  return response;
+}
 export {
   register,
   logIn,
@@ -231,4 +252,6 @@ export {
   updateProfile,
   profilePictureUpload,
   userList,
+  userListIntro,
+  friendRequests,
 };
