@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <UsersIndex />,
       },
       {
-        path: "profile/postsIndex",
+        path: "profile/:userId/postsIndex",
         element: <PostsIndex />,
       },
     ],

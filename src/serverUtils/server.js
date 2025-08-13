@@ -239,6 +239,19 @@ async function friendRequests(){
   response = await response.json();
   return response;
 }
+
+async function recentPosts(){
+  let response = await fetch(`http://localhost:3000/posts/recentPosts`,{
+    mode:"cors",
+    method:"GET",
+    credentials:"include",
+  })
+  console.log(response);
+  response = await response.json();
+  console.log(response);
+  return response;
+}
+
 export {
   register,
   logIn,
@@ -254,4 +267,5 @@ export {
   userList,
   userListIntro,
   friendRequests,
+  recentPosts,
 };

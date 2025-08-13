@@ -1,51 +1,25 @@
+import { useEffect, useState } from "react";
+import { recentPosts } from "../serverUtils/server";
 function PostsIndex() {
+  const [posts,setPosts] = useState([]);
 
+  async function recent(){
+    let rPosts = await recentPosts();
+    setPosts(rPosts);
+  }
+
+  useEffect(()=>{
+    recent();
+  },[])
     return (
       <div>
-  
-        <div className="postArea">
-  
-          <div className="postSubmission">
-            <textarea></textarea>
-            <button>Submit new post!</button>
-          </div>
-  
-          <div className="posts">
-  
-            <div className="post">
-              <span>Blah blah blah blah blah blah</span>
-              <button>Like</button>
-  
-              <div className="comments">
-                <textarea></textarea>
-                <button>Post Comment</button>
-              </div>
-            </div>
-  
-            <div className="post">
-              <span>Blah blah blah blah blah blah</span>
-              <button>Like</button>
-  
-              <div className="comments">
-                <textarea></textarea>
-                <button>Post Comment</button>
-              </div>
-            </div>
-  
-            <div className="post">
-              <span>Blah blah blah blah blah blah</span>
-              <button>Like</button>
-  
-              <div className="comments">
-                <textarea></textarea>
-                <button>Post Comment</button>
-              </div>
-            </div>
-  
-          </div>
-  
+       {posts.map((post,index)=>{
+        return(
+        <div className="recentPost" key = {index}>
+          <a href={"http://127.0.0.1:5173/profile/" + post.authorId}>{post.firstname + " " + post.lastname} </a>
+          <span>{post.content}</span>
         </div>
-  
+       ) })}
       </div>
     );
   }
