@@ -30,7 +30,7 @@ function Users() {
         return (
           <div id = {user.id} key ={user.id} className = "randomUser">
             <img className="profileAvatar" src={user.profilepic}></img>
-            <span>{user.firstname + " " + user.lastname}</span>
+            <a href = {"http://127.0.0.1:5173/profile/" + user.id}>{user.firstname + " " + user.lastname}</a>
             <button id = {user.id} onClick={friendRequest}>Friend Request!</button>
           </div>
         )

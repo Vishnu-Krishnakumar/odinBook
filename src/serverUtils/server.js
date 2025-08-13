@@ -68,12 +68,13 @@ async function retrieveUser(userId){
   console.log(user);
   return user;
 }
-async function newPost(formData){
-  const body = {
-    title:'',
-    content:formData.get("content"),
-    userId:formData.get("userId"),
-  }
+
+async function newPost(body){
+  // const body = {
+  //   title:'',
+  //   content:formData.get("content"),
+  //   userId:formData.get("userId"),
+  // }
   console.log(body);
   let response = await fetch("http://localhost:3000/posts/createPost",{
     mode:"cors",
@@ -119,16 +120,16 @@ async function retrieveComments(postId){
   return comments;
 }
 
-async function submitComment(formData){
-  let postId = formData.get("postId");
-  const body = {
-    content:formData.get("content"),
-    userId:formData.get("userId"),
-    postId: postId,
-    email: formData.get("username"),
-  }
+async function submitComment(body){
+  // let postId = formData.get("postId");
+  // const body = {
+  //   content:formData.get("content"),
+  //   userId:formData.get("userId"),
+  //   postId: postId,
+  //   email: formData.get("username"),
+  // }
   console.log(body);
-  let response = await fetch(`http://localhost:3000/comments/${postId}`,{
+  let response = await fetch(`http://localhost:3000/comments/${body.postId}`,{
     mode:"cors",
     method:"POST",
     credentials:"include",

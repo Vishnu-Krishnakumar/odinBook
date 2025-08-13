@@ -5,16 +5,18 @@ function FriendRequest({userId, isOwnProfile}){
   const [newRequests, setRequests] = useState([]);
   console.log(userId);
 
-  function friendAccept(e){
+  async function friendAccept(e){
     e.preventDefault();
     console.log(e.target.id);
     socket.emit(`acceptFriend`,{user:userId,friend:parseInt(e.target.id)});
+    await request();
   }
 
-  function friendDecline(e){
+  async function friendDecline(e){
     e.preventDefault();
     console.log(e.target.id);
     socket.emit(`declineFriend`,{user:userId,friend:parseInt(e.target.id)});
+    await request();
   }
 
   async function request(){
@@ -59,7 +61,7 @@ function FriendRequest({userId, isOwnProfile}){
           newRequests.map((request,index)=>{
             return(
               <li key = {index}> 
-                {request.senderId}
+                {request.sender.firstname + " " + request.sender.lastname}
                 <button id = {request.senderId} onClick={friendAccept}>Accept</button>
                 <button id = {request.senderId} onClick={friendDecline}>Decline</button>
               </li>
