@@ -56,19 +56,18 @@ function FriendRequest({userId, isOwnProfile}){
     return(
       <div className ="friendRequests">
        <h2 onClick={request}>Friend Requests</h2>
-       <ul>
        {
           newRequests.map((request,index)=>{
             return(
-              <li key = {index}> 
-                {request.sender.firstname + " " + request.sender.lastname}
+              <div key = {index}>
+
+                <a href={`https://odinbookbackend-ay2f.onrender.com/user/profile/` + request.senderId}>{request.sender.firstname + " " + request.sender.lastname}</a>
                 <button id = {request.senderId} onClick={friendAccept}>Accept</button>
                 <button id = {request.senderId} onClick={friendDecline}>Decline</button>
-              </li>
+              </div>
             )
           })
        }
-       </ul>
       </div>
     )
   }

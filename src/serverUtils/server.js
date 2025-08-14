@@ -9,7 +9,7 @@ async function register(formData){
     passwordRepeat : formData.get('passwordRepeat'), 
   }
 
-  let response = await fetch('http://localhost:3000/user/register',{
+  let response = await fetch('https://odinbookbackend-ay2f.onrender.com/user/register',{
     mode:"cors",
     method: "POST",
     credentials: "include",
@@ -29,7 +29,7 @@ async function logIn(formData){
     password:formData.get("password"),
   };
   let verified = {};
-  let response = await fetch("http://localhost:3000/user/login",{
+  let response = await fetch("https://odinbookbackend-ay2f.onrender.com/user/login",{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -56,7 +56,7 @@ async function logIn(formData){
 }
 
 async function retrieveUser(userId){
-  let response = await fetch(`http://localhost:3000/user/profile/${userId}`,{
+  let response = await fetch(`https://odinbookbackend-ay2f.onrender.com/user/profile/${userId}`,{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -76,7 +76,7 @@ async function newPost(body){
   //   userId:formData.get("userId"),
   // }
   console.log(body);
-  let response = await fetch("http://localhost:3000/posts/createPost",{
+  let response = await fetch("https://odinbookbackend-ay2f.onrender.com/posts/createPost",{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -93,7 +93,7 @@ async function retrievePosts(userId){
   const body ={
     userId: userId
   }
-  let response = await fetch(`http://localhost:3000/posts/getUserPosts/${userId}`,{
+  let response = await fetch(`https://odinbookbackend-ay2f.onrender.com/posts/getUserPosts/${userId}`,{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -107,7 +107,7 @@ async function retrievePosts(userId){
 }
 
 async function retrieveComments(postId){
-  let response = await fetch (`http://localhost:3000/comments/${postId}`,{
+  let response = await fetch (`https://odinbookbackend-ay2f.onrender.com/comments/${postId}`,{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -129,7 +129,7 @@ async function submitComment(body){
   //   email: formData.get("username"),
   // }
   console.log(body);
-  let response = await fetch(`http://localhost:3000/comments/${body.postId}`,{
+  let response = await fetch(`https://odinbookbackend-ay2f.onrender.com/comments/${body.postId}`,{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -148,7 +148,7 @@ async function likePost(postId,userId){
     id:userId,
     postId:postId,
   }
-  let response = await fetch('http://localhost:3000/posts/likePost',{
+  let response = await fetch('https://odinbookbackend-ay2f.onrender.com/posts/likePost',{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -163,7 +163,7 @@ async function likePost(postId,userId){
 }
 
 async function friendList(userId){
-  let response = await fetch(`http://localhost:3000/user/profile/friendList/${userId}`,{
+  let response = await fetch(`https://odinbookbackend-ay2f.onrender.com/user/profile/friendList/${userId}`,{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -183,7 +183,7 @@ async function updateProfile(formData){
     email : formData.get('email'),
     originalEmail : formData.get('originalEmail'),
   }
-  let response = await fetch (`http://localhost:3000/user/profileUpdate`,{
+  let response = await fetch (`https://odinbookbackend-ay2f.onrender.com/user/profileUpdate`,{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -199,7 +199,7 @@ async function updateProfile(formData){
 
 async function profilePictureUpload(formData){
 
-  let response = await fetch (`http://localhost:3000/user/profilePictureUpload`,{
+  let response = await fetch (`https://odinbookbackend-ay2f.onrender.com/user/profilePictureUpload`,{
     mode:"cors",
     method:"POST",
     credentials:"include",
@@ -211,7 +211,7 @@ async function profilePictureUpload(formData){
 }
 
 async function userList(){
-  let response = await fetch('http://localhost:3000/user/userList',{
+  let response = await fetch('https://odinbookbackend-ay2f.onrender.com/user/userList',{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -221,7 +221,7 @@ async function userList(){
 }
 
 async function userListIntro(){
-  let response = await fetch('http://localhost:3000/user/userListIntro',{
+  let response = await fetch('https://odinbookbackend-ay2f.onrender.com/user/userListIntro',{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -231,7 +231,7 @@ async function userListIntro(){
   return response;
 }
 async function friendRequests(){
-  let response = await fetch ('http://localhost:3000/user/friendRequests',{
+  let response = await fetch ('https://odinbookbackend-ay2f.onrender.com/user/friendRequests',{
     mode:"cors",
     method:"GET",
     credentials:"include",
@@ -242,7 +242,7 @@ async function friendRequests(){
 }
 
 async function recentPosts(){
-  let response = await fetch(`http://localhost:3000/posts/recentPosts`,{
+  let response = await fetch(`https://odinbookbackend-ay2f.onrender.com/posts/recentPosts`,{
     mode:"cors",
     method:"GET",
     credentials:"include",

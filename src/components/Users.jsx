@@ -23,7 +23,7 @@ function Users() {
   },[])
 
   return (
-    <div>
+    <div className='randomUsersCard'>
       <span>People you might know!</span>
       <div className='randomUsers'>
       {users.map((user)=>{

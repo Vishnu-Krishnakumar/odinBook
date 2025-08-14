@@ -75,8 +75,12 @@ function Profile({route}){
   return (
     <div >
       <div>
+        <header>
+        <a>
         <Link to="usersIndex">User Index</Link>
+        </a>
         <button onClick={onClickTest}>Log Out</button>
+        </header>
         <div>
           <a href = {"http://127.0.0.1:5173/profile/" + loggedUser?.user.id}>Welcome {loggedUser?.user.firstname}</a>
           

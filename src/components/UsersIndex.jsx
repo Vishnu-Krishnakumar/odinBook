@@ -23,6 +23,8 @@ function UsersIndex(){
 
   return (
     <div>
+      <h2>OdinBook Users!</h2>
+    <div className='userIndex'>
       {users.map((user)=>{
         return (
           <div id = {user.id} key ={user.id} className = "randomUser">
@@ -33,6 +35,7 @@ function UsersIndex(){
         )
         
       })}
+    </div>
     </div>
   )
 }

@@ -6,6 +6,7 @@ function Friends({userId, isOwnProfile}){
 
   const [friends,setFriends] = useState([]);
   console.log(userId);
+  
   useEffect(()=>{
     
     async function setList(){

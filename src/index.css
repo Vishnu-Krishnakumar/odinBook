@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87); */
+  background-color: #5e3131;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #64faff;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #53f283;
 }
 
 body {
@@ -38,11 +38,11 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  /* padding: 0.6em 1.2em; */
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #c9d343;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -60,10 +60,30 @@ button:focus-visible {
 .friends{
   display: flex;
   flex-direction: column;
+  border: 4px outset rgb(99, 154, 168);
+}
+.friends a {
+  display: flex;
+  align-items: flex-start;
+}
+.friendRequests{
+  display: flex;
+  flex-direction: column;
+  border: 4px solid rgb(99, 154, 168);
+}
+.friendRequests div {
+  display: flex;
+  padding:5px;
+}
+.friendRequests button {
+ margin:5px;
+
 }
 .intro{
   display: flex;
   flex-direction: column;
+  color: #646cff;
+  border: 4px inset rgb(99, 154, 168);
 }
 .mainProfile{
   display: flex;
@@ -78,10 +98,19 @@ button:focus-visible {
 .userProfile{
   display: flex;
 }
+header a {
+  display: flex;
+  padding: 5px;
+}
+header button{
+ display: flex;
+ padding: 5px;
+}
 
 .postArea {
   display: flex;
   flex-direction: column;
+  width:850px;
 }
 .postSubmission{
   display: flex;
@@ -90,9 +119,17 @@ button:focus-visible {
 .post{
   display: flex;
   flex-direction: column;
+  border: 5px solid rgb(48, 46, 45);
+  margin:5px;
+  color:#0a0e53;
+  background-color: rgb(138, 117, 117);
 }
 .randomUsers{
   display:flex;
+}
+.randomUsersCard{
+  width:1300px;
+  height:420px;
 }
 .randomUser{
   padding: 10px;
@@ -102,12 +139,18 @@ button:focus-visible {
 ul{
   list-style-type: none;
 }
-li{
-  padding:0px;
-}
 .profileUpdate{
   display: flex;
   flex-direction: column;
+}
+.userIndex{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width:800px
+}
+.recentPost{
+  border: 5px solid teal;
+  padding: 10px;
 }
 @media (prefers-color-scheme: light) {
   :root {

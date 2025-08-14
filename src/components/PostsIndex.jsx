@@ -17,7 +17,7 @@ function PostsIndex() {
         return(
         <div className="recentPost" key = {index}>
           <a href={"http://127.0.0.1:5173/profile/" + post.authorId}>{post.firstname + " " + post.lastname} </a>
-          <span>{post.content}</span>
+          <span dangerouslySetInnerHTML={{ __html: post.content }}></span>
         </div>
        ) })}
       </div>
