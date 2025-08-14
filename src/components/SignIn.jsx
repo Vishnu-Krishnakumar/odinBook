@@ -14,8 +14,7 @@ function SignIn(){
     e.preventDefault();
     console.log("This probably isnt working right now");
     const formData = new FormData(e.target);
-    console.log(formData.get("userName"));
-    console.log(formData.get("password"));
+
     logout();
     let token = await logIn(formData);
 

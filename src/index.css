@@ -106,7 +106,10 @@ header button{
  display: flex;
  padding: 5px;
 }
-
+.introPage{
+  display: flex;
+  flex-direction: row;
+}
 .postArea {
   display: flex;
   flex-direction: column;
